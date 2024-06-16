@@ -1,6 +1,6 @@
-# Fixes a faulty wordpress site
-exec { 'fix-wordpress':
-  command => 'bash -c "sed -i s/class-wp-locale.phpp/class-wp-locale.php/ 
-/var/www/html/wp-settings.php; service apache2 restart"',
- i path    => '/usr/bin:/usr/sbin:/bin'
+# Manifest to fix Nginx open file limit configuration
+exec { 'nginx fix':
+  onlyif   => 'test -e /etc/default/nginx',
+ i command  => "sed -i s/'-n 15'/'-n 4096'/g /etc/default/nginx;  service nginx restart",
+  provider => 'shell'
 }
