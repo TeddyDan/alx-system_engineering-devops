@@ -32,4 +32,4 @@ def number_of_subscribers(subreddit):
     )
     if results.status_code == 200:
         return results.json()['data']['subscribers']
-    return 0i
+    return 0
